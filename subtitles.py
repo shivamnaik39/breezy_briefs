@@ -1,4 +1,7 @@
 import youtube_dl
+import requests
+import webvtt
+import tempfile
 
 
 def filter_type_subs(all_types, type="vtt"):
@@ -32,10 +35,14 @@ def filter_subs(all_subs, language="en", type="vtt"):
     if format_subs is None:
         return {"error": True, "message": "Invalid subtitles format or format not available!"}
 
-    return {"error": False, "caption_url": format_subs['url'], "message": "Subtitles filtered successfully!"}
+    subs_url = format_subs['url']
+    subtitle_res = get_subs_from_url(subs_url)
+    subtitles = get_text_from_subs(subtitle_res)
+
+    return {"error": False, "subtitles": subtitles, "message": "Subtitles fetched successfully!"}
 
 
-def get_captions_url(video_url, language="en", type="vtt"):
+def get_subtitles(video_url, language="en", type="vtt"):
     ydl_opts = {
         'writeautomaticsub': True,
         'writesubtitles': True,
@@ -72,4 +79,26 @@ def get_captions_url(video_url, language="en", type="vtt"):
         return filtered_sub_res
 
     # If no subs available
-    return {"error": True, "message": "No captions available!"}
+    return {"error": True, "message": "No subtitles available!"}
+
+
+# function to get captions from the fetched url
+def get_subs_from_url(url: str):
+    # Make a request to the URL returned by the youtube API
+    response = requests.get(url)
+
+    return response
+
+
+#  Extract only text from the subs
+def get_text_from_subs(subtitle_res):
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.vtt') as temp_file:
+
+        temp_file.write(subtitle_res.text.encode())
+        captions = webvtt.read(temp_file.name)
+
+    # Extract the text content from the captions
+    subtitles = [caption.text for caption in captions]
+    subtitles = "".join(subtitles)
+
+    return subtitles
