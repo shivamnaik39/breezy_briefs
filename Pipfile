@@ -8,6 +8,7 @@ youtube-dl = "*"
 fastapi = "*"
 pydantic = "*"
 requests = "*"
+webvtt-py = "*"
 
 [dev-packages]
 autopep8 = "*"
