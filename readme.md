@@ -31,19 +31,31 @@ Go to the project directory
 Install dependencies (using pipenv)
 
 ```bash
- pipenv install
+  pipenv install
+
+  # for development
+  pipenv install --dev
 ```
 
-Install dependencies (using pip)
+Install dependencies using pip  (pipenv recommended )
 
 ```bash
  pip install -r ./requirements.txt
 ```
 
+Activate the Virtual Environment 
+
+```bash
+ pipenv shell
+```
+
 Run the program
 
 ```bash
- uvicorn main:app --reload
+pipenv run start
+
+# for development
+pipenv run dev
 ```
 
 ## API Documentation
@@ -69,3 +81,4 @@ http://localhost:8000/redoc
 ## Authors
 
 - [@shivamnaik39](https://www.github.com/shivamnaik39)
+- [@grishmakadam](https://github.com/grishmakadam)
