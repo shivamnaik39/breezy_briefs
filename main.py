@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Query, Path
 from fastapi.responses import JSONResponse
-from subtitles import get_subtitles
+from utils.subtitles import get_subtitles
 from pydantic import BaseModel
 from typing import Optional
 

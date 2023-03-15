@@ -1,17 +1,27 @@
 -i https://pypi.org/simple
 anyio==3.6.2 ; python_full_version >= '3.6.2'
+brotli==1.0.9 ; platform_python_implementation == 'CPython'
 certifi==2022.12.7 ; python_version >= '3.6'
-charset-normalizer==3.0.1
+charset-normalizer==3.1.0 ; python_full_version >= '3.7.0'
+click==8.1.3 ; python_version >= '3.7'
 docopt==0.6.2
-fastapi==0.90.0
+fastapi==0.94.1
+h11==0.14.0 ; python_version >= '3.7'
+httptools==0.5.0
 idna==3.4 ; python_version >= '3.5'
-pydantic==1.10.4
+mutagen==1.46.0 ; python_version >= '3.7'
+pycryptodomex==3.17 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
+pydantic==1.10.6
+python-dotenv==1.0.0
+pyyaml==6.0
 requests==2.28.2
 sniffio==1.3.0 ; python_version >= '3.7'
-starlette==0.23.0 ; python_version >= '3.7'
-typing-extensions==4.4.0 ; python_version >= '3.7'
-urllib3==1.26.14 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
+starlette==0.26.1 ; python_version >= '3.7'
+typing-extensions==4.5.0 ; python_version >= '3.7'
+urllib3==1.26.15 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
+uvicorn[standard]==0.21.0
+uvloop==0.17.0
+watchfiles==0.18.1
+websockets==10.4
 webvtt-py==0.4.6
-youtube-dl==2021.12.17
-torch
-transformers
+yt-dlp==2023.3.4

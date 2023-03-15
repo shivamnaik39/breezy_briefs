@@ -1,5 +1,5 @@
 import torch
-from transformers import T5Tokenizer,T5ForConditionalGeneration,T5Config
+from transformers import T5Tokenizer,T5ForConditionalGeneration
 
 #initialize pre-trained model
 model=T5ForConditionalGeneration.from_pretrained("t5-small")
