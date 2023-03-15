@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Query, Path, Response
+from fastapi import FastAPI, Query, Path
+from fastapi.responses import JSONResponse
 from subtitles import get_subtitles
 from pydantic import BaseModel
 from typing import Optional
@@ -16,4 +17,8 @@ def get_captions(yt_id: str = Query(title="Youtube URL", description="URL of the
     subtitles = get_subtitles(
         video_url=yt_id, language=language, type=type)
 
-    return subtitles
+    if subtitles['error']:
+        return JSONResponse(subtitles, 400)
+
+    else:
+        return JSONResponse(subtitles, 200)

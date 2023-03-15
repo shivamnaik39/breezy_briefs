@@ -1,4 +1,4 @@
-import youtube_dl
+import yt_dlp
 import requests
 import webvtt
 import tempfile
@@ -49,12 +49,12 @@ def get_subtitles(video_url, language="en", type="vtt"):
         'skip_download': True
     }
 
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         try:
             info_dict = ydl.extract_info(video_url, download=False)
 
-        except (youtube_dl.utils.DownloadError, youtube_dl.utils.ExtractorError, youtube_dl.utils.PostProcessingError):
-            return {"error": True, "message": "Invalid YouTube URL or Video ID"}
+        except (yt_dlp.utils.DownloadError, yt_dlp.utils.ExtractorError, yt_dlp.utils.PostProcessingError) as error:
+            return {"error": True, "message": str(error)}
 
         # print(info_dict.keys())
         if 'subtitles' in info_dict and info_dict['subtitles']:
@@ -98,7 +98,7 @@ def get_text_from_subs(subtitle_res):
         captions = webvtt.read(temp_file.name)
 
     # Extract the text content from the captions
-    subtitles = [caption.text for caption in captions]
+    subtitles = [caption.text.replace('\n', ' ') for caption in captions]
     subtitles = "".join(subtitles)
 
     return subtitles
